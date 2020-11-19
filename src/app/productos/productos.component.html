@@ -1,0 +1,194 @@
+<div class="container">
+    <app-menu></app-menu>
+    <div class="row">
+
+        <div class="col"></div>
+        <div class="col">
+            <div class="card" style="width: 40rem; border-radius: 10px;">
+                <div class="card-header text-center">
+                    Registrar Nuevo Producto
+                </div>
+                <div class="card-body">
+                    <div class="input-group mb-4">
+                        <div class="input-group-prepend">
+                            <div class="input-group-text">Id:</div>
+                        </div>
+                        <input type="text" class="form-control" id="idProducto" placeholder="Id del Producto" [(ngModel)]="nuevoProducto.idproducto">
+                    </div>
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <div class="input-group-text">Nombre:</div>
+                        </div>
+                        <input type="text" class="form-control" id="nombreProducto" placeholder="Nombre del Producto" [(ngModel)]="nuevoProducto.nombreproducto">
+                        <!-- los que van vacios -->
+                    </div>
+
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <div class="input-group-text">Precio:</div>
+                        </div>
+                        <input type="text" class="form-control" id="precioProducto" placeholder="Precio del Producto" [(ngModel)]="nuevoProducto.precio">
+                        <!-- los que van vacios -->
+                    </div>
+
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <div class="input-group-text">Comprador:</div>
+                        </div>
+                        <input type="text" class="form-control" id="compraProducto" placeholder="Nombre del Comprador" [(ngModel)]="nuevoProducto.comprador">
+                        <!-- los que van vacios 
+                        
+                        -->
+                    </div>
+
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <div class="input-group-text">Unidades:</div>
+                        </div>
+                        <input type="text" class="form-control" id="unidadProducto" placeholder="Unidades Compradas" [(ngModel)]="nuevoProducto.unidadescompradas">
+                        <!-- los que van vacios -->
+                    </div>
+
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <div class="input-group-text">Total:</div>
+                        </div>
+                        <input type="text" class="form-control" id="totalProducto" placeholder="Total de la compra" [(ngModel)]="nuevoProducto.totalpagar">
+                        <!-- los que van vacios -->
+                    </div>
+
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <div class="input-group-text">Fecha:</div>
+                        </div>
+                        <input type="datetime-local" class="form-control" id="fechaProducto" placeholder="yyyy-mm-dd" [(ngModel)]="nuevoProducto.fecha">
+                        <!-- los que van vacios -->
+                    </div>
+
+
+                </div>
+                <div class="card-footer text-center">
+                    <button type="button" class="btn btn-primary" id="entrar" (click)="agregarProducto()">Agregar   <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-upload" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd" d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/>
+                        <path fill-rule="evenodd" d="M7.646 1.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 2.707V11.5a.5.5 0 0 1-1 0V2.707L5.354 4.854a.5.5 0 1 1-.708-.708l3-3z"/>
+                      </svg></button>
+                </div>
+            </div>
+        </div>
+        <div class="col"></div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <table class="table table-hover table-dark" style="border-radius: 10px;">
+                <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>Producto</th>
+                        <th>Comprador</th>
+                        <th>Fecha</th>
+                        <th class="text-right">Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let producto of productos">
+                        <td>{{producto.idproducto}}</td>
+                        <td (click)="verProducto(producto.idproducto)">{{producto.nombreproducto}}</td>
+                        <td>{{producto.comprador}}</td>
+                        <td>{{producto.fecha}}</td>
+                        <td class="text-right">
+                            <button class="btn btn-primary btn-sm" *ngIf="level=='A'" (click)="temporalProducto(producto)" data-toggle='modal' data-target='#modalEditar'><svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-pencil" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                <path fill-rule="evenodd" d="M12.146.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1 0 .708l-10 10a.5.5 0 0 1-.168.11l-5 2a.5.5 0 0 1-.65-.65l2-5a.5.5 0 0 1 .11-.168l10-10zM11.207 2.5L13.5 4.793 14.793 3.5 12.5 1.207 11.207 2.5zm1.586 3L10.5 3.207 4 9.707V10h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.293l6.5-6.5zm-9.761 5.175l-.106.106-1.528 3.821 3.821-1.528.106-.106A.5.5 0 0 1 5 12.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.468-.325z"/>
+                              </svg></button> &nbsp;
+                            <button class="btn btn-danger btn-sm" *ngIf="level=='A'" (click)="temporalProducto(producto)" data-toggle='modal' data-target='#modalEliminar'><svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-trash" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/>
+                                <path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4L4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/>
+                              </svg></button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<!-- Modal Para Editar -->
+<div class="modal fade" id="modalEditar" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">Modificar Producto</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <div class="input-group-text">Id:</div>
+                    </div>
+                    <input type="text" class="form-control" id="idProductoEditar" placeholder="Id del Producto" [(ngModel)]="tempProducto.idproducto" disabled>
+                </div>
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <div class="input-group-text">Nombre:</div>
+                    </div>
+                    <input type="text" class="form-control" id="nombreProductoEditar" placeholder="Nombre del Producto" [(ngModel)]="tempProducto.nombreproducto">
+                </div>
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <div class="input-group-text">Precio:</div>
+                    </div>
+                    <input type="text" class="form-control" id="precioProductoEditar" placeholder="Precio del Producto" [(ngModel)]="tempProducto.precio">
+                </div>
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <div class="input-group-text">Comprador:</div>
+                    </div>
+                    <input type="text" class="form-control" id="compraProductoEditar" placeholder="Nombre del Comprador" [(ngModel)]="tempProducto.comprador" disabled>
+                </div>
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <div class="input-group-text">Unidades:</div>
+                    </div>
+                    <input type="text" class="form-control" id="unidadProductoEditar" placeholder="Unidades Compradas" [(ngModel)]="tempProducto.unidadescompradas">
+                </div>
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <div class="input-group-text">Total:</div>
+                    </div>
+                    <input type="text" class="form-control" id="fechaProductoEditar" placeholder="Total de la Compra" [(ngModel)]="tempProducto.totalpagar">
+                </div>
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <div class="input-group-text">Fecha:</div>
+                    </div>
+                    <input type="datetime-local" class="form-control" id="nombreProductoEditar" placeholder="Fecha" [(ngModel)]="tempProducto.fecha">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="guardarCambios()">Guardar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Para Eliminar -->
+<div class="modal fade" id="modalEliminar" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">Eliminar Producto</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>¿Esta seguro que quiere eliminar el producto: {{tempProducto.nombreproducto}}?</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+                <button type="button" class="btn btn-danger" data-dismiss="modal" (click)="confirmarEliminar()">Si</button>
+            </div>
+        </div>
+    </div>
+</div>
